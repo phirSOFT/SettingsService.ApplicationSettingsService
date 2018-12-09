@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "phirSOFT.SettingsService.Settings", "phirSOFT.SettingsService.Settings\phirSOFT.SettingsService.Settings.csproj", "{4FFDBC3A-444A-49FC-BCD8-544C72D97591}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "phirSOFT.SettingsService.ApplicationSettingsService", "phirSOFT.SettingsService.ApplicationSettingsService\phirSOFT.SettingsService.ApplicationSettingsService.csproj", "{4FFDBC3A-444A-49FC-BCD8-544C72D97591}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
