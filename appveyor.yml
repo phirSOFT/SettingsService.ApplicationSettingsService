@@ -1,37 +1,28 @@
-skip_tags: true
+﻿skip_tags: true
 image: Visual Studio 2017
 configuration: Release
 
 skip_commits:
   message: /\[WIP\]/
 
-install:
-  - cinst gitversion.portable
-  - nuget restore
-  - ps: gitversion /l console /output buildserver
-
-assembly_info:
-  patch: false
-
-dotnet_csproj:
-  patch: true
-  file: '**\*.csproj'
-  version: $(GitVersion_FullSemVer)
-  package_version: $(GitVersion_FullSemVer)
-  assembly_version: $(GitVersion_AssemblySemVer)
-  file_version: $(GitVersion_AssemblySemVer)
-  informational_version: $(GitVersion_FullSemVer)
-
 on_failure:
   - ps: 7z a "WorkingTree.zip"
   - ps: Push-AppveyorArtifact WorkingTree.zip
 
-build:
-  publish_nuget: true
-  publish_nuget_symbols: true
-  include_nuget_references: true
-  parallel: true
-  verbosity: minimal
+install:
+  - choco install gitversion.portable -pre -y
+
+assembly_info:
+  patch: false
+
+before_build:
+  - nuget restore
+  - ps: gitversion /l console /output buildserver /updateAssemblyInfo
+
+after_build:
+  - cmd: ECHO nuget pack phirSOFT.SettingsService.ApplicationSettingsService\phirSOFT.SettingsService.ApplicationSettingsService.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: nuget pack phirSOFT.SettingsService.ApplicationSettingsService\phirSOFT.SettingsService.ApplicationSettingsService.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: appveyor PushArtifact "phirSOFT.SettingsService.ApplicationSettingsService.%GitVersion_NuGetVersion%.nupkg"
 
 deploy:
 - provider: GitHub
