@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "phirSOFT.SettingsService.Settings", "phirSOFT.SettingsService.Settings\phirSOFT.SettingsService.Settings.csproj", "{4FFDBC3A-444A-49FC-BCD8-544C72D97591}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4FFDBC3A-444A-49FC-BCD8-544C72D97591}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FFDBC3A-444A-49FC-BCD8-544C72D97591}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FFDBC3A-444A-49FC-BCD8-544C72D97591}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FFDBC3A-444A-49FC-BCD8-544C72D97591}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {470009A9-04D3-4495-9A65-ECE408CF84B3}
+	EndGlobalSection
+EndGlobal
