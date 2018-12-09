@@ -27,7 +27,7 @@ after_build:
 deploy:
 - provider: GitHub
   auth_token:
-    secure: rpPcHXchFO6ThAr1Zn8zl3lskjqrT74AspFjmJZj+lIRbGI07Vsc+4+fKXcPGFML
+    secure: yswFCZCA7JeJhx7wgRTYHUrG4ekVIL1HHlzbnx8J5zLALrtBrMEhYf5djORWOFyR
   on:
     branch: master
 - provider: NuGet
