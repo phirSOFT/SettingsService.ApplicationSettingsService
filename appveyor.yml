@@ -20,8 +20,8 @@ before_build:
   - ps: gitversion /l console /output buildserver /updateAssemblyInfo
 
 after_build:
-  - cmd: ECHO nuget pack phirSOFT.SettingsService.ApplicationSettingsService\phirSOFT.SettingsService.ApplicationSettingsService.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
-  - cmd: nuget pack phirSOFT.SettingsService.ApplicationSettingsService\phirSOFT.SettingsService.ApplicationSettingsService.nuspec -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: ECHO nuget pack phirSOFT.SettingsService.ApplicationSettingsService\phirSOFT.SettingsService.ApplicationSettingsService.csproj -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
+  - cmd: nuget pack phirSOFT.SettingsService.ApplicationSettingsService\phirSOFT.SettingsService.ApplicationSettingsService.csproj -version "%GitVersion_NuGetVersion%" -prop "target=%CONFIGURATION%"
   - cmd: appveyor PushArtifact "phirSOFT.SettingsService.ApplicationSettingsService.%GitVersion_NuGetVersion%.nupkg"
 
 deploy:
