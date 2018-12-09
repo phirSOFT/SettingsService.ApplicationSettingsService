@@ -7,8 +7,8 @@
     <ProjectGuid>{4FFDBC3A-444A-49FC-BCD8-544C72D97591}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>phirSOFT.SettingsService.Settings</RootNamespace>
-    <AssemblyName>phirSOFT.SettingsService.Settings</AssemblyName>
+    <RootNamespace>phirSOFT.SettingsService.ApplicationSettingsService</RootNamespace>
+    <AssemblyName>phirSOFT.SettingsService.ApplicationSettingsService</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
