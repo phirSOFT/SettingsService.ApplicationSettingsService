@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="phirSOFT.SettingsService">
-      <Version>0.1.36</Version>
+      <Version>0.2.3</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
