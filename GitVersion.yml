@@ -3,3 +3,4 @@ mode: ContinuousDelivery
 branches: {}
 ignore:
   sha: []
+merge-message-formats: {}

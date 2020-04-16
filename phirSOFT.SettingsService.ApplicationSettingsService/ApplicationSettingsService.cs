@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using phirSOFT.SettingsService.Abstractions;
 
-namespace phirSOFT.SettingsService.Settings
+namespace phirSOFT.SettingsService.ApplicationSettingsService
 {
     public class ApplicationSettingsService : ISettingsService
     {
@@ -23,7 +21,7 @@ namespace phirSOFT.SettingsService.Settings
             return Task.FromResult(_applicationSettings[key]);
         }
 
-        public Task<bool> IsRegisterdAsync(string key)
+        public Task<bool> IsRegisteredAsync(string key)
         {
             return Task.FromResult(_applicationSettings.Context.ContainsKey(key));
         }
