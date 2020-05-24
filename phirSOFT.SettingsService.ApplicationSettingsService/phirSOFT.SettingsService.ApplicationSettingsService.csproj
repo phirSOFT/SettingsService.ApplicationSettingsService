@@ -12,31 +12,14 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="GitVersionTask" Version="5.2.4">
+    <PackageReference Include="GitVersionTask" Version="5.3.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="phirSOFT.SettingsService">
       <Version>0.2.6</Version>
     </PackageReference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
-    <PackageReference Include="System.Configuration.ConfigurationManager">
-      <Version>4.7.0</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
-    <PackageReference Include="System.Configuration.ConfigurationManager">
-      <Version>4.7.0</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1'">
-    <PackageReference Include="System.Configuration.ConfigurationManager">
-      <Version>4.7.0</Version>
-    </PackageReference>
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2'">
-    <PackageReference Include="System.Configuration.ConfigurationManager">
+    <PackageReference Include="System.Configuration.ConfigurationManager" Condition="'$(TargetFrameworkIdentifier)' == '.NETCoreApp'">
       <Version>4.7.0</Version>
     </PackageReference>
   </ItemGroup>
