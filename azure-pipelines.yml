@@ -1,0 +1,88 @@
+pool:
+  vmImage: "windows-2019"
+
+trigger:
+  - master
+  - release/*
+  - hotfix/*
+  - feature
+
+pr:
+  - master
+  - release/*
+  - hotfix/*
+  - feature
+
+variables:
+  Release.IsPrerelease: $[and(ne(variables['Build.Reason'], 'PullRequest'), or(startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'), startsWith(variables['Build.SourceBranch'], 'refs/heads/hotfix/')))]
+  Release.Publish: $[and(ne(variables['Build.Reason'], 'PullRequest'), or(startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'), startsWith(variables['Build.SourceBranch'], 'refs/heads/hotfix/'), eq(variables['Build.SourceBranch'], 'refs/heads/master')))]
+
+steps:
+  - task: GitVersion@5
+    inputs:
+      runtime: "core"
+  - task: UseDotNet@2
+    displayName: "Use .Net Core sdk "
+    inputs:
+      useGlobalJson: true
+
+  - task: DotNetCoreCLI@2
+    displayName: "dotnet build"
+
+  - task: UseDotNet@2
+    inputs:
+      packageType: "runtime"
+      version: "1.0.16"
+
+  - task: DotNetCoreCLI@2
+    displayName: "dotnet test"
+    inputs:
+      command: test
+
+  - task: CopyFiles@2
+    displayName: "Copy Files to: $(build.artifactstagingdirectory)"
+    inputs:
+      SourceFolder: "$(system.defaultworkingdirectory)"
+      Contents: |
+        **\*.nupkg
+        **\*.snupkg
+      TargetFolder: "$(build.artifactstagingdirectory)"
+      flattenFolders: true
+    condition: succeededOrFailed()
+
+  - task: DotNetCoreCLI@2
+    displayName: "dotnet push"
+    inputs:
+      command: "push"
+      packagesToPush: "$(Build.ArtifactStagingDirectory)/*.nupkg"
+      nuGetFeedType: "internal"
+      publishVstsFeed: "388aae20-7808-45ea-998a-2f8a20859841/a32b6034-468f-431e-84b4-5b66854b4bf0"
+
+  - task: NuGetToolInstaller@1
+    condition: and(succeeded(), eq(variables['Release.Publish'], 'True'))
+    inputs:
+      versionSpec: ">4.9.0"
+
+  - task: NuGetCommand@2
+    displayName: "Publish to NuGet.org"
+    condition: and(succeeded(), eq(variables['Release.Publish'], 'True'))
+    inputs:
+      command: "push"
+      packagesToPush: "$(Build.ArtifactStagingDirectory)/**/*.nupkg;"
+      nuGetFeedType: "external"
+      publishFeedCredentials: "Nuget (SettingService)"
+
+  - task: GitHubRelease@0
+    displayName: "GitHub release (create)"
+    condition: and(succeeded(), eq(variables['Release.Publish'], 'True'))
+    inputs:
+      gitHubConnection: "phirSOFT.SettingsService"
+      repositoryName: "$(Build.Repository.Name)"
+      action: "create"
+      target: "$(Build.SourceVersion)"
+      tagSource: "manual"
+      tag: "$(GitVersion.FullSemVer)"
+      title: "$(GitVersion.FullSemVer)"
+      releaseNotesFile: "ReleaseNotes.md"
+      isPreRelease: eq(variables['Release.IsPrerelease'], 'True')
+      compareWith: "lastFullRelease"
